@@ -9,12 +9,14 @@
 </head>
 <body>
     <main class="container">
+
         <article id="current-forecast">
             <h1 class="city">City name</h1>
             <p class="temp">Temp</p>
             <p class="description">Description</p>
             <p class="min-max-temp">High Low</p>
         </article>
+
         <article id="hourly-forecast">
             <h1>Hourly forcast</h1>
             <section class="hourly-container">
@@ -25,21 +27,19 @@
                 </article>
             </section>
         </article>
+
         <article id="five-day-forecast">
-            <h1>5 Day forecast</h1>
-            <article>
-                <h2>Today</h2>
-                <p>icon</p>
-                <p>low</p>
-                <p>high</p>
-            </article>
-            <article>
-                <h2>Tuesday</h2>
-                <p>icon</p>
-                <p>low</p>
-                <p>high</p>
-            </article>
+            <h1>5-Day Forecast</h1>
+            <section class="five-day-forecast-container">
+                <article class="day-wise-forecast">
+                    <h3 class="day">Today</h3>
+                    <img class="icon" src="" alt="Not Found" />
+                    <p class="min-temp">low</p>
+                    <p class="max-temp">high</p>
+                </article>
+            </section>
         </article>
+
         <article id="feels-like">
             <h1>Feels like</h1>
             <p class="feels-like-temp">temp</p>
@@ -48,6 +48,7 @@
             <h1>Humidity</h1>
             <p class="humidity-value">value</p>
         </article>
+
     </main>
     <script src="main.js"></script>
 </body>

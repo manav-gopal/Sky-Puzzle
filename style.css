@@ -8,7 +8,7 @@
   --spacing-medium: 8px;
   --spaciing-regular: 16px;
 
-  --font-small: .5rem;
+  --font-small: 0.5rem;
   --font-regular: 1rem;
   --font-large: 2rem;
   --font-xl: 4rem;
@@ -16,18 +16,20 @@
   --font-semibold: 600;
 }
 
-h1,h2{
-    margin: 0;
+h1,
+h2 {
+  margin: 0;
 }
 
-p{
-    margin: var(--spacing-medium);
+p {
+  margin: var(--spacing-medium);
 }
 
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  width: 400px;
+  max-width: 80%;
+
   margin: auto;
 }
 
@@ -37,18 +39,26 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
+    "search search"
     "current current"
     "hourly hourly"
     "fiveday fiveday"
     "feelslike humidity";
-    gap: var(--spaciing-regular);
+  gap: var(--spaciing-regular);
 }
 
 .container,
-.container > article{
-    border: 1px solid;
-    border-radius: var(--spaciing-regular);
-    padding: var(--spaciing-regular);
+.container > article {
+  border: 1px solid;
+  border-radius: var(--spaciing-regular);
+  padding: var(--spaciing-regular);
+}
+
+#search {
+  grid-area: search;
+  font-size: var(--font-large);
+  border-radius: var(--font-regular);
+  padding: var(--spacing-medium);
 }
 
 /* styles related to current weather data */
@@ -58,16 +68,16 @@ body {
   text-align: center;
 }
 
-#current-forecast .temp{
-    font-size: var(--font-xl);
+#current-forecast .temp {
+  font-size: var(--font-xl);
 }
-#current-forecast .description{
-    text-transform: capitalize;
+#current-forecast .description {
+  text-transform: capitalize;
 }
 #current-forecast .min-max-temp,
-#current-forecast .description{
-    font-size: var(--font-regular);
-    font-weight: var(--font-semibold);
+#current-forecast .description {
+  font-size: var(--font-regular);
+  font-weight: var(--font-semibold);
 }
 
 /* Style area related to Hourly Forecast */
@@ -76,7 +86,7 @@ body {
   grid-area: hourly;
   text-align: center;
 }
-#hourly-forecast .hourly-container{
+#hourly-forecast .hourly-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   grid-auto-flow: column;
@@ -87,12 +97,12 @@ body {
 /* #hourly-forecast .hourly-container .time{
 
 } */
-#hourly-forecast .hourly-container .icon{
+#hourly-forecast .hourly-container .icon {
   height: 100px;
   width: 100px;
   object-fit: contain;
 }
-#hourly-forecast .hourly-container .hourly-temp{
+#hourly-forecast .hourly-container .hourly-temp {
   font-size: var(--font-regular);
   font-weight: var(--font-semibold);
 }
@@ -102,33 +112,34 @@ body {
 #five-day-forecast {
   grid-area: fiveday;
   text-align: center;
+  overflow: auto;
 }
-#five-day-forecast .five-day-forecast-container{
+#five-day-forecast .five-day-forecast-container {
   display: grid;
   grid-auto-flow: row;
 }
-.five-day-forecast-container .day-wise-forecast{
+.five-day-forecast-container .day-wise-forecast {
   display: grid;
   grid-template: auto / repeat(4, 1fr);
   gap: var(--spaciing-regular);
   place-items: center;
 }
 .five-day-forecast-container .day-wise-forecast .min-temp,
-.five-day-forecast-container .day-wise-forecast .max-temp{
+.five-day-forecast-container .day-wise-forecast .max-temp {
   font-size: var(--font-regular);
   font-weight: var(--font-semibold);
 }
-.five-day-forecast-container .day-wise-forecast .min-temp{
+.five-day-forecast-container .day-wise-forecast .min-temp {
   opacity: 50%;
 }
-.five-day-forecast-container .day-wise-forecast .min-temp{
+.five-day-forecast-container .day-wise-forecast .min-temp {
   justify-self: end;
 }
-.five-day-forecast-container .day-wise-forecast .icon{
+.five-day-forecast-container .day-wise-forecast .icon {
   height: 75px;
   width: 75px;
 }
-.five-day-forecast-container .day-wise-forecast .day{
+.five-day-forecast-container .day-wise-forecast .day {
   text-transform: capitalize;
   justify-self: start;
 }
@@ -142,4 +153,17 @@ body {
 #humidity {
   grid-area: humidity;
   text-align: center;
+}
+
+@media (width>=650px) {
+  .container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+      "search search search search"
+      "current current current current"
+      "hourly hourly fiveday fiveday"
+      "feelslike humidity fiveday fiveday";
+    gap: var(--spacing-regular);
+  }
 }

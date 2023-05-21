@@ -9,10 +9,13 @@
 </head>
 <body>
     <main class="container">
+        <input list="cities" type="search" name="search" id="search" placeholder="search cities..." autocomplete="off">
+        <datalist id="cities">
+        </datalist>
 
         <article id="current-forecast">
             <h1 class="city">City name</h1>
-            <p class="temp">Temp</p>
+            <p class="temp">--</p>
             <p class="description">Description</p>
             <p class="min-max-temp">High Low</p>
         </article>
@@ -21,9 +24,9 @@
             <h1>Hourly forcast</h1>
             <section class="hourly-container">
                 <article>
-                    <h2 class="time">Now</h2>
-                    <img class="icon" src="" alt="" />icon
-                    <p class="hourly-temp">temp</p>
+                    <h3 class="time">Now</h3>
+                    <p class="icon"></p>
+                    <p class="hourly-temp">--</p>
                 </article>
             </section>
         </article>
@@ -32,21 +35,27 @@
             <h1>5-Day Forecast</h1>
             <section class="five-day-forecast-container">
                 <article class="day-wise-forecast">
-                    <h3 class="day">Today</h3>
-                    <img class="icon" src="" alt="Not Found" />
-                    <p class="min-temp">low</p>
-                    <p class="max-temp">high</p>
+                    <h3>Today</h3>
+                    <p class="icon">--</p>
+                    <p class="min-temp">--</p>
+                    <p class="max-temp">--</p>
+                </article>
+                <article class="day-wise-forecast">
+                    <h3>Wed</h3>
+                    <p class="icon">--</p>
+                    <p class="min-temp">--</p>
+                    <p class="max-temp">--</p>
                 </article>
             </section>
         </article>
 
         <article id="feels-like">
             <h1>Feels like</h1>
-            <p class="feels-like-temp">temp</p>
+            <p class="feels-like-temp">--</p>
         </article>
         <article id="humidity">
             <h1>Humidity</h1>
-            <p class="humidity-value">value</p>
+            <p class="humidity-value">--</p>
         </article>
 
     </main>

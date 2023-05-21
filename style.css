@@ -28,9 +28,15 @@ p {
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  max-width: 80%;
-
-  margin: auto;
+  background-image: url(https://images.pexels.com/photos/1119976/pexels-photo-1119976.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* mobile first approach */
@@ -45,6 +51,11 @@ body {
     "fiveday fiveday"
     "feelslike humidity";
   gap: var(--spaciing-regular);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: rgb(255, 255, 255);
+  max-width: 80%;
+  transform: scale(0.8);
+  transition: 0.5s
 }
 
 .container,
@@ -59,6 +70,11 @@ body {
   font-size: var(--font-large);
   border-radius: var(--font-regular);
   padding: var(--spacing-medium);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  outline: none;
+  border: none;
+  font-size: var(--font-regular)
 }
 
 /* styles related to current weather data */
@@ -150,9 +166,16 @@ body {
   grid-area: feelslike;
   text-align: center;
 }
+#feels-like > p {
+  font-size: var(--font-large);
+}
+
 #humidity {
   grid-area: humidity;
   text-align: center;
+}
+#humidity > p{
+  font-size: var(--font-large);
 }
 
 @media (width>=650px) {

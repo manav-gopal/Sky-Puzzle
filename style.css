@@ -57,11 +57,11 @@ body {
     "fiveday fiveday"
     "feelslike humidity";
   gap: var(--spaciing-regular);
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(25, 25, 25, 0.5);
   color: rgb(255, 255, 255);
   max-width: 80%;
   transform: scale(0.8);
-  transition: 0.5s
+  transition: 0.5s;
 }
 
 .container,
@@ -194,6 +194,6 @@ body {
       "hourly hourly fiveday fiveday"
       "feelslike humidity fiveday fiveday";
     gap: var(--spacing-regular);
-    max-width: none;
+    max-width: 100%;
   }
 }

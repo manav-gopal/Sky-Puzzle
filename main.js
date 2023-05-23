@@ -29,8 +29,9 @@ const getHourlyForecast = async ({ name: city }) => {
 
 //to formate the temprature and get URL
 
+// console.log("this is icon : ",icon);
 const formatTemprature = (temp) => `${temp?.toFixed(1)}°`;
-const createIconUrl = (icon) => `http://openweathermap.org/img/wn/${icon}@2x.png`;
+const createIconUrl = (icon) => {console.log("this is icon : ",icon);return `http://openweathermap.org/img/wn/${icon}@2x.png`};
 
 // To load the data
 

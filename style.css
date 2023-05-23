@@ -9,7 +9,7 @@
   --spaciing-regular: 16px;
 
   --font-small: 0.5rem;
-  --font-regular: 1rem;
+  --font-regular: 0.8rem;
   --font-large: 2rem;
   --font-xl: 4rem;
 
@@ -30,20 +30,12 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   width: 100%;
   height: 100vh;
-}
-.bg{
-  background-image: url(https://images.pexels.com/photos/1119976/pexels-photo-1119976.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
-  background-repeat: no-repeat;
-  background-size: cover;
-  object-fit: cover;
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100vh;
-  background-color: rgb(100, 100, 100);
-  background-blend-mode: multiply;
+  justify-content: center;
+  background-color: #49c5b6;
 }
+
 
 /* mobile first approach */
 
@@ -59,9 +51,8 @@ body {
   gap: var(--spaciing-regular);
   background-color: rgba(25, 25, 25, 0.5);
   color: rgb(255, 255, 255);
-  max-width: 80%;
-  transform: scale(0.8);
-  transition: 0.5s;
+  margin: 0 10%;
+  max-width: 85%;
 }
 
 .container,
@@ -194,6 +185,6 @@ body {
       "hourly hourly fiveday fiveday"
       "feelslike humidity fiveday fiveday";
     gap: var(--spacing-regular);
-    max-width: 100%;
+    margin: 10px;
   }
 }

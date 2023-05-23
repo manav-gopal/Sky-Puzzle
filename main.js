@@ -6,7 +6,7 @@ let selectedCity;
 const API_KEY = "2885a2c4947ec0377208bcc84e238d2d";
 
 const getCitiesGeoLocation = async (searchText) => {
-    const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${searchText}&limit=5&appid=${API_KEY}`);
+    const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${searchText}&limit=5&appid=${API_KEY}`);
     return response.json();
 }
 

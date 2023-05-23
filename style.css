@@ -9,7 +9,7 @@
   --spaciing-regular: 16px;
 
   --font-small: 0.5rem;
-  --font-regular: 0.8rem;
+  --font-regular: 1rem;
   --font-large: 2rem;
   --font-xl: 4rem;
 
@@ -164,7 +164,7 @@ body {
   text-align: center;
 }
 #feels-like > p {
-  font-size: var(--font-large);
+  font-size: var(--font-regular);
 }
 
 #humidity {
@@ -172,7 +172,7 @@ body {
   text-align: center;
 }
 #humidity > p{
-  font-size: var(--font-large);
+  font-size: var(--font-regular);
 }
 
 @media (width>=650px) {

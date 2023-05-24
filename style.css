@@ -6,7 +6,7 @@
 
 :root {
   --spacing-medium: 8px;
-  --spaciing-regular: 16px;
+  --spaciing-regular: 12px;
 
   --font-small: 0.5rem;
   --font-regular: 1rem;
@@ -36,7 +36,6 @@ body {
   background-color: #49c5b6;
 }
 
-
 /* mobile first approach */
 
 .container {
@@ -49,9 +48,9 @@ body {
     "fiveday fiveday"
     "feelslike humidity";
   gap: var(--spaciing-regular);
-  background-color: rgba(25, 25, 25, 0.5);
+  background-color: rgba(75, 75, 75, 0.5);
   color: rgb(255, 255, 255);
-  margin: 0 10%;
+  /* margin: 0 10%; */
   max-width: 85%;
 }
 
@@ -60,6 +59,11 @@ body {
   border: 1px solid rgb(62, 62, 62);
   border-radius: var(--spaciing-regular);
   padding: var(--spaciing-regular);
+}
+.container > article {
+  border: 1px solid rgb(62, 62, 62);
+  border-radius: var(--spaciing-regular);
+  padding: var(--spaciing-small);
 }
 
 #search {
@@ -71,7 +75,7 @@ body {
   color: white;
   outline: none;
   border: none;
-  font-size: var(--font-regular)
+  font-size: var(--font-regular);
 }
 
 /* styles related to current weather data */
@@ -163,16 +167,10 @@ body {
   grid-area: feelslike;
   text-align: center;
 }
-#feels-like > p {
-  font-size: var(--font-regular);
-}
 
 #humidity {
   grid-area: humidity;
   text-align: center;
-}
-#humidity > p{
-  font-size: var(--font-regular);
 }
 
 @media (width>=650px) {
@@ -185,6 +183,17 @@ body {
       "hourly hourly fiveday fiveday"
       "feelslike humidity fiveday fiveday";
     gap: var(--spacing-regular);
-    margin: 10px;
+  }
+  #humidity > p {
+    font-size: 1.5rem;
+  }
+  #feels-like > p {
+    font-size: 1.5rem;
+  }
+}
+@media (width<=650px) {
+  .container {
+    top: 50px;
+    position: absolute;
   }
 }

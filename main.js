@@ -76,6 +76,7 @@ const loadHourlyForecast = ({ main: { temp: tempNow }, weather: [{ icon: iconNow
 
 const calculateDayWiseForecast = (hourlyForecast) => {
     let dayWiseForecast = new Map();
+    console.log("this is dayWiseForecast : ",hourlyForecast);
     for (let forecast of hourlyForecast) {
         const [date] = forecast.dt_txt.split(" ");
         const dayOfTheWeek = DAYS_OF_THE_WEEK[new Date(date).getDay()];

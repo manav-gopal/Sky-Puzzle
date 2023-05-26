@@ -7,18 +7,6 @@
     <title>Weather App</title>
     <link rel="icon" type="image/png" href="https://img.icons8.com/?size=512&id=txoP0q0H3NEb&format=png"/>
     <link rel="stylesheet" href="style.css" />
-    <link rel="manifest" href="/manifest.json">
-    <script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
-            console.log('ServiceWorker registration successful with scope: ', registration.scope);
-        }, function(err) {
-            console.log('ServiceWorker registration failed: ', err);
-        });
-        });
-    }
-    </script>
 </head>
 <body>
     <main class="container">
@@ -70,10 +58,7 @@
             <h1>Humidity</h1>
             <p class="humidity-value">--</p>
         </article>
-        <div id="install-prompt" style="display: none;">
-            <button id="install-button">Install</button>
-          </div>
-          
+
     </main>
     <script src="main.js"></script>
 </body>

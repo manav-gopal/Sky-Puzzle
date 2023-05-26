@@ -8,6 +8,18 @@
     <link rel="icon" type="image/png" href="https://img.icons8.com/?size=512&id=txoP0q0H3NEb&format=png"/>
     <link rel="stylesheet" href="style.css" />
     <link rel="manifest" href="manifest.json" />
+    <script>
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/service-worker.js')
+            .then(function(registration) {
+              console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch(function(error) {
+              console.log('Service Worker registration failed:', error);
+            });
+        }
+      </script>
+      
 </head>
 <body>
     <main class="container">

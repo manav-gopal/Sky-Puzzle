@@ -8,7 +8,7 @@
         "type": "image/png"
       }
     ],
-    "start_url": "/",
+    "start_url": "https://manav-gopal.github.io/weather-app/",
     "display": "standalone"
   }
   

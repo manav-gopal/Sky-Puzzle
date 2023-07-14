@@ -20,7 +20,7 @@ const getCurrentWeatherData = async ({lat,lon,name: city}) => {
 const getHourlyForecast = async ({ name: city }) => {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`);
     const data = await response.json();
-    // console.log(data);
+    console.log(data);
     return data.list.map(forecast => {
         const { main: { temp, temp_max, temp_min }, dt, dt_txt, weather: [{ description, icon }] } = forecast;
         return { temp, temp_max, temp_min, dt, dt_txt, description, icon }
@@ -29,19 +29,129 @@ const getHourlyForecast = async ({ name: city }) => {
 
 //to formate the temprature and get URL
 
-// console.log("this is icon : ",icon);
-const formatTemprature = (temp) => `${temp?.toFixed(1)}°`;
-const createIconUrl = (icon) => {console.log("this is icon : ",icon);return `https://openweathermap.org/img/wn/${icon}@2x.png`};
+const formatTemprature = (temp) => `${temp?.toFixed(0)}°`;
+// const createIconUrl = (icon) => {return `https://openweathermap.org/img/wn/${icon}@2x.png`};
+const createIconUrl = (icon) => {
+    switch (icon) {
+        case '01d':
+            return './icons/static/sun.png';
+        case '01n':
+            return './icons/static/night.png';
+        case '02d':
+            return './icons/static/cloudy.png';
+        case '02n':
+            return './icons/static/cloudy-night.png';
+        case '03d':
+            return './icons/static/clouds.png';
+        case '03n':
+            return './icons/static/clouds.png';
+        case '04d':
+            return './icons/static/clouds.png';
+        case '04n':
+            return './icons/static/clouds.png';
+        case '09d':
+            return './icons/static/rain.png';
+        case '09n':
+            return './icons/static/rain.png';
+        case '10d':
+            return './icons/static/rain (2).png';
+        case '10n':
+            return './icons/static/rain.png';
+        case '11d':
+            return './icons/static/storm.png';
+        case '11n':
+            return './icons/static/storm.png';
+        case '13d':
+            return './icons/static/snow.png';
+        case '13n':
+            return './icons/static/snow.png';
+        case '50d':
+            return './icons/static/foggy.png';
+        case '50n':
+            return './icons/static/foggy.png';
+    
+        default:
+            return './icons/static/clouds.png'
+    }
+}
+function pngtogif(test){
+    switch (test) {
+        case "./icons/static/sun.png":
+             return './icons/sun.gif';
+        case "./icons/static/sun.png":
+             return './icons/night.gif';
+        case './icons/static/cloudy.png':
+             return './icons/cloudy.gif';
+        case './icons/static/cloudy-night.png':
+             return './icons/cloudy-night.gif';
+        case './icons/static/clouds.png':
+             return './icons/clouds.gif';
+        case './icons/static/rain.png':
+             return './icons/rain.gif';
+        case './icons/static/rain (2).png':
+             return './icons/rain (2).gif';
+        case './icons/static/storm.png':
+             return './icons/storm.gif';
+        case './icons/static/snow.png':
+             return './icons/snow.gif';
+        case './icons/static/foggy.png':
+             return './icons/foggy.gif';
+        default:
+            return test;
+    }
+}
+function giftopng(test){
+    switch (test) {
+        case './icons/sun.gif':
+             return './icons/static/sun.png';
+        case './icons/night.gif':
+             return './icons/static/night.png';
+        case './icons/cloudy.gif':
+             return './icons/static/cloudy.png';
+        case './icons/cloudy-night.gif':
+             return './icons/static/cloudy-night.png';
+        case './icons/clouds.gif':
+             return './icons/static/clouds.png';
+        case './icons/rain.gif':
+             return './icons/static/rain.png';
+        case './icons/rain (2).gif':
+             return './icons/static/rain (2).png';
+        case './icons/storm.gif':
+             return './icons/static/storm.png';
+        case './icons/snow.gif':
+             return './icons/static/snow.png';
+        case './icons/foggy.gif':
+             return './icons/static/foggy.png';
+        default:
+            return test;
+    }
+}
+document.body.addEventListener("mouseover", function(e) {
+    if (e.target.classList.contains("icon")) {
+        var t = e.target.getAttribute("src");
+        console.log(t);
+        path = pngtogif(t);
+        e.target.src = path;
+    }
+  },false)
+document.body.addEventListener("mouseout", function(e) {
+    if (e.target.classList.contains("icon")) {
+        var t = e.target.getAttribute("src");
+        console.log(t);
+        path = giftopng(t);
+        e.target.src = path;
+    }
+  },false)
 
 // To load the data
 
-const loadCurrentForecast = ({ name, main: { temp, temp_max, temp_min }, weather: [{ description }] }) => {
+const loadCurrentForecast = ({ name, main: { temp }, weather: [{ description, icon }] }) => {
+    console.log("currrrrent icon: ",icon);
     const currentForecastElement = document.querySelector("#current-forecast");
+    currentForecastElement.querySelector(".icon").src = `${createIconUrl(icon)}`;
     currentForecastElement.querySelector(".city").textContent = name;
     currentForecastElement.querySelector(".temp").textContent = formatTemprature(temp);
     currentForecastElement.querySelector(".description").textContent = description;
-    currentForecastElement.querySelector(".min-max-temp").textContent = `H: ${formatTemprature(temp_max)} L: ${formatTemprature(temp_min)}`;
-
 }
 
 //Loading the hourly forecast
@@ -50,7 +160,7 @@ const loadHourlyForecast = ({ main: { temp: tempNow }, weather: [{ icon: iconNow
     const timeFormatter = Intl.DateTimeFormat("en", {
         hour12: true, hour: "numeric"
     });
-    let dataFor12Hours = hourlyForecast.slice(2, 14); // 12 entries
+    let dataFor12Hours = hourlyForecast.slice(2, 9); // 8 entries
     const hourlyContainer = document.querySelector(".hourly-container");
     let innerHTMLString =
         `<article>
@@ -80,7 +190,7 @@ const calculateDayWiseForecast = (hourlyForecast) => {
     for (let forecast of hourlyForecast) {
         const [date] = forecast.dt_txt.split(" ");
         const dayOfTheWeek = DAYS_OF_THE_WEEK[new Date(date).getDay()];
-        console.log(dayOfTheWeek);
+        // console.log(dayOfTheWeek);
         if (dayWiseForecast.has(dayOfTheWeek)) {
             let forecastForDay = dayWiseForecast.get(dayOfTheWeek);
             forecastForDay.push(forecast);
@@ -127,16 +237,20 @@ const loadHumidity = ({ main: { humidity } }) => {
     let container = document.querySelector("#humidity");
     container.querySelector(".humidity-value").textContent = `${humidity} %`;
 }
+const loadWind = ({ wind: { speed } }) => {
+    let container = document.querySelector("#wind");
+    container.querySelector(".wind").textContent = `${speed.toFixed(1)}m/s`;
+}
 
 const loadData = async () => {
     const currentWeather = await getCurrentWeatherData(selectedCity);
-    console.log(currentWeather);
     loadCurrentForecast(currentWeather);
     const hourlyForecast = await getHourlyForecast(currentWeather);
     loadHourlyForecast(currentWeather, hourlyForecast);
     loadFiveDayForecast(hourlyForecast)
     loadFeelsLike(currentWeather);
     loadHumidity(currentWeather);
+    loadWind(currentWeather);
 }
 
 loadForecastUsingGeoLocation = () => {
@@ -184,6 +298,7 @@ const onSearchChange = async (event) => {
 const handleCitySelection = (event) => {
     console.log("Selection done");
     selectedCityText = event.target.value;
+    console.log(selectedCity);
     let options = document.querySelectorAll("#cities > option");
     console.log(options);
     if (options?.length) {
@@ -191,6 +306,9 @@ const handleCitySelection = (event) => {
         selectedCity = JSON.parse(selectedOption.getAttribute("data-city-details"));
         console.log({ selectedCity });
         loadData();
+
+        // Clear the search input value
+        document.querySelector("#search").value = "";
     }
 }
 

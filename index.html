@@ -1,78 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkyPuzzle</title>
-    <link rel="icon" type="image/png" href="https://img.icons8.com/?size=512&id=txoP0q0H3NEb&format=png"/>
+    <link rel="icon" type="image/png" href="https://img.icons8.com/?size=512&id=txoP0q0H3NEb&format=png" />
     <link rel="stylesheet" href="style.css" />
     <link rel="manifest" href="manifest.json" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
     <script>
         if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('/service-worker.js')
-            .then(function(registration) {
-              console.log('Service Worker registered with scope:', registration.scope);
-            })
-            .catch(function(error) {
-              console.log('Service Worker registration failed:', error);
-            });
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(function (registration) {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch(function (error) {
+                    console.log('Service Worker registration failed:', error);
+                });
         }
-      </script>
-      
+    </script>
+
 </head>
+
 <body>
-    <main class="container">
-        <input list="cities" type="search" name="search" id="search" placeholder="Search cities - Ex. Bilaspur, Raipur" autocomplete="off">
-        <datalist id="cities">
-        </datalist>
+    <div class="contBody">
 
-        <article id="current-forecast">
-            <h1 class="city">City name</h1>
-            <p class="temp">--</p>
-            <p class="description">Description</p>
-            <p class="min-max-temp">High Low</p>
-        </article>
+        <div class="sider">
+            <div class="searchCont">
+                <img class="searchIcon" src="./icons/search.png"></img>
+                <input class="search" list="cities" type="search" name="search" id="search"
+                    placeholder="Search cities" autocomplete="off">
+                <datalist id="cities">
+                </datalist>
+            </div>
 
-        <article id="hourly-forecast">
-            <h1>Hourly forcast</h1>
-            <section class="hourly-container">
-                <article>
-                    <h3 class="time">Now</h3>
-                    <p class="icon"></p>
-                    <p class="hourly-temp">--</p>
-                </article>
-            </section>
-        </article>
+            <article id="current-forecast">
+                <img id="mainIcon" class="icon"></img>
+                <h1 class="city">City name</h1>
+                <p class="temp">--</p><span>C</span>
+                <p class="description">Description</p>
+            </article>
+        </div>
 
-        <article id="five-day-forecast">
-            <h1>5-Day Forecast</h1>
-            <section class="five-day-forecast-container">
-                <article class="day-wise-forecast">
-                    <h3>Today</h3>
-                    <p class="icon">--</p>
-                    <p class="min-temp">--</p>
-                    <p class="max-temp">--</p>
-                </article>
-                <article class="day-wise-forecast">
-                    <h3>Wed</h3>
-                    <p class="icon">--</p>
-                    <p class="min-temp">--</p>
-                    <p class="max-temp">--</p>
-                </article>
-            </section>
-        </article>
+        <main class="container">
+            <article id="hourly-forecast">
+                <h1>Hourly forcast</h1>
+                <section class="hourly-container">
+                    <article>
+                        <h3 class="time">Now</h3>
+                        <p class="icon"></p>
+                        <p class="hourly-temp">--</p>
+                    </article>
+                </section>
+            </article>
 
-        <article id="feels-like">
-            <h1>Feels like</h1>
-            <p class="feels-like-temp">--</p>
-        </article>
-        <article id="humidity">
-            <h1>Humidity</h1>
-            <p class="humidity-value">--</p>
-        </article>
+            <article id="five-day-forecast">
+                <h1>5-Day Forecast</h1>
+                <section class="five-day-forecast-container">
+                    <article class="day-wise-forecast">
+                        <h3>Today</h3>
+                        <p class="icon">--</p>
+                        <p class="min-temp">--</p>
+                        <p class="max-temp">--</p>
+                    </article>
+                    <article class="day-wise-forecast">
+                        <h3>Wed</h3>
+                        <p class="icon">--</p>
+                        <p class="min-temp">--</p>
+                        <p class="max-temp">--</p>
+                    </article>
+                </section>
+            </article>
 
-    </main>
+            <article id="feels-like">
+                <h1>Feels like</h1>
+                <p class="feels-like-temp">--</p>
+            </article>
+            <article id="humidity">
+                <h1>Humidity</h1>
+                <p class="humidity-value">--</p>
+            </article>
+            <article id="wind">
+                <h1>Wind</h1>
+                <p class="wind">--</p>
+            </article>
+
+        </main>
+    </div>
     <script src="main.js"></script>
 </body>
+
 </html>

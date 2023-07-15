@@ -30,7 +30,7 @@ const getHourlyForecast = async ({ name: city }) => {
 //to formate the temprature and get URL
 
 const formatTemprature = (temp) => `${temp?.toFixed(0)}°`;
-// const createIconUrl = (icon) => {return `https://openweathermap.org/img/wn/${icon}@2x.png`};
+// const createIconUrl = (icon) => {return `https://openweathermap.org/img/wn/${icon}@2x.png`}; // its for openweather api's png
 const createIconUrl = (icon) => {
     switch (icon) {
         case '01d':
@@ -145,13 +145,18 @@ document.body.addEventListener("mouseout", function(e) {
 
 // To load the data
 
-const loadCurrentForecast = ({ name, main: { temp }, weather: [{ description, icon }] }) => {
-    console.log("currrrrent icon: ",icon);
+const loadCurrentForecast = ({ name, main: { temp }, weather: [{ description, icon }], rain }) => {
+    console.log("currrrrent icon: ", rain['1h']);
     const currentForecastElement = document.querySelector("#current-forecast");
     currentForecastElement.querySelector(".icon").src = `${createIconUrl(icon)}`;
     currentForecastElement.querySelector(".city").textContent = name;
     currentForecastElement.querySelector(".temp").textContent = formatTemprature(temp);
     currentForecastElement.querySelector(".description").textContent = description;
+    
+    var rainPer = rain['1h']*100;
+    var rainRoundedPer = Math.round(rainPer/3);
+
+    currentForecastElement.querySelector(".rainChanse").textContent = `Rain - ${rainRoundedPer}%`;
 }
 
 //Loading the hourly forecast
@@ -244,6 +249,7 @@ const loadWind = ({ wind: { speed } }) => {
 
 const loadData = async () => {
     const currentWeather = await getCurrentWeatherData(selectedCity);
+    console.log("it is CW: ", currentWeather)
     loadCurrentForecast(currentWeather);
     const hourlyForecast = await getHourlyForecast(currentWeather);
     loadHourlyForecast(currentWeather, hourlyForecast);

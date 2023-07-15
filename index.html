@@ -33,8 +33,8 @@
         <div class="sider">
             <div class="searchCont">
                 <img class="searchIcon" src="./icons/search.png"></img>
-                <input class="search" list="cities" type="search" name="search" id="search"
-                    placeholder="Search cities" autocomplete="off">
+                <input class="search" list="cities" type="search" name="search" id="search" placeholder="Search cities"
+                    autocomplete="off">
                 <datalist id="cities">
                 </datalist>
             </div>
@@ -42,8 +42,17 @@
             <article id="current-forecast">
                 <img id="mainIcon" class="icon"></img>
                 <h1 class="city">City name</h1>
-                <p class="temp">--</p><span>C</span>
-                <p class="description">Description</p>
+                <p class="temp">--</p><span>C</span><br>
+                <div class="disc">
+                    <div class="conts">
+                        <img class="sicon" src="./icons/static/weather.png" alt="not found">
+                        <p class="description">Description</p>
+                    </div>
+                    <div class="conts">
+                        <img class="sicon" src="./icons/static/heavy-rain.png" alt="not found">
+                        <p class="rainChanse">rainChanse</p>
+                    </div>
+                </div>
             </article>
         </div>
 

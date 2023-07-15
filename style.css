@@ -89,16 +89,17 @@ body {
 
 #current-forecast {
   grid-area: current;
-  text-align: center;
 }
 #current-forecast h1 {
   margin: 10px 0;
+  padding-left: 2rem;
 }
 
 #current-forecast .temp {
   font-size: var(--font-large);
   display: inline;
   margin-right: 0;
+  padding-left: 2rem;
 }
 #current-forecast span {
   font-size: 1.3rem;
@@ -109,13 +110,15 @@ body {
   width: 80%;
   height: 30%;
 }
-#current-forecast .description {
+#current-forecast .description,
+#current-forecast .rainChanse {
   text-transform: capitalize;
+  display: inline-block;
+  font-size: 0.8rem;
 }
-#current-forecast .min-max-temp,
-#current-forecast .description {
-  font-size: var(--font-regular);
-  font-weight: var(--font-semibold);
+#current-forecast .disc .conts {
+  display: flex;
+  align-items: center;
 }
 
 /* Style area related to Hourly Forecast */
@@ -283,6 +286,19 @@ body {
   display: inline-block;
   width: 20px;
   height: 20px;
+}
+#current-forecast .sicon{
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+#current-forecast > .disc{
+  width: 100%;
+  text-align: left;
+  padding-top: 2rem;
+  padding-left: 2rem;
+  height: auto;
+  display: inline-block;
 }
 .icon{
   transform: scale(0.6);

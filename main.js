@@ -22,8 +22,8 @@ const getHourlyForecast = async ({ name: city }) => {
     const data = await response.json();
     console.log(data);
     return data.list.map(forecast => {
-        const { main: { temp, temp_max, temp_min }, dt, dt_txt, weather: [{ description, icon }] } = forecast;
-        return { temp, temp_max, temp_min, dt, dt_txt, description, icon }
+        const { main: { temp, temp_max, temp_min }, dt, dt_txt, weather: [{ description, icon }],rain } = forecast;
+        return { temp, temp_max, temp_min, dt, dt_txt, description, icon, rain }
     })
 }
 
@@ -126,10 +126,13 @@ function giftopng(test){
             return test;
     }
 }
+
+// To Show Hover Effect On The Icons........
+
 document.body.addEventListener("mouseover", function(e) {
     if (e.target.classList.contains("icon")) {
         var t = e.target.getAttribute("src");
-        console.log(t);
+        // console.log(t);
         path = pngtogif(t);
         e.target.src = path;
     }
@@ -137,7 +140,7 @@ document.body.addEventListener("mouseover", function(e) {
 document.body.addEventListener("mouseout", function(e) {
     if (e.target.classList.contains("icon")) {
         var t = e.target.getAttribute("src");
-        console.log(t);
+        // console.log(t);
         path = giftopng(t);
         e.target.src = path;
     }
@@ -145,18 +148,12 @@ document.body.addEventListener("mouseout", function(e) {
 
 // To load the data
 
-const loadCurrentForecast = ({ name, main: { temp }, weather: [{ description, icon }], rain }) => {
-    console.log("currrrrent icon: ", rain['1h']);
+const loadCurrentForecast = ({ name, main: { temp }, weather: [{ description, icon }]}) => {
     const currentForecastElement = document.querySelector("#current-forecast");
     currentForecastElement.querySelector(".icon").src = `${createIconUrl(icon)}`;
     currentForecastElement.querySelector(".city").textContent = name;
     currentForecastElement.querySelector(".temp").textContent = formatTemprature(temp);
     currentForecastElement.querySelector(".description").textContent = description;
-    
-    var rainPer = rain['1h']*100;
-    var rainRoundedPer = Math.round(rainPer/3);
-
-    currentForecastElement.querySelector(".rainChanse").textContent = `Rain - ${rainRoundedPer}%`;
 }
 
 //Loading the hourly forecast
@@ -185,6 +182,13 @@ const loadHourlyForecast = ({ main: { temp: tempNow }, weather: [{ icon: iconNow
         // to get data without formatted.... 
     }
     hourlyContainer.innerHTML = innerHTMLString;
+    
+    let todayRain = hourlyForecast.slice(2, 3);
+    var temp = todayRain[0].rain['3h'];
+    var rainPer = temp*100;
+    var rainRoundedPer = Math.round(rainPer*100)/100;
+
+    document.querySelector(".rainChanse").textContent = `Rain - ${rainRoundedPer}%`;
 }
 
 // five day forecast
@@ -249,9 +253,9 @@ const loadWind = ({ wind: { speed } }) => {
 
 const loadData = async () => {
     const currentWeather = await getCurrentWeatherData(selectedCity);
-    console.log("it is CW: ", currentWeather)
     loadCurrentForecast(currentWeather);
     const hourlyForecast = await getHourlyForecast(currentWeather);
+    console.log("it is HW: ", hourlyForecast)
     loadHourlyForecast(currentWeather, hourlyForecast);
     loadFiveDayForecast(hourlyForecast)
     loadFeelsLike(currentWeather);

@@ -11,7 +11,7 @@ const getCitiesGeoLocation = async (searchText) => {
 }
 
 //get data from the API....
-const getCurrentWeatherData = async ({lat,lon,name: city}) => {
+const getCurrentWeatherData = async ({ lat, lon, name: city }) => {
     const url = lat && lon ? `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric` : `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
     const response = await fetch(url);
     return response.json();
@@ -22,7 +22,7 @@ const getHourlyForecast = async ({ name: city }) => {
     const data = await response.json();
     console.log(data);
     return data.list.map(forecast => {
-        const { main: { temp, temp_max, temp_min }, dt, dt_txt, weather: [{ description, icon }],rain } = forecast;
+        const { main: { temp, temp_max, temp_min }, dt, dt_txt, weather: [{ description, icon }], rain } = forecast;
         return { temp, temp_max, temp_min, dt, dt_txt, description, icon, rain }
     })
 }
@@ -31,124 +31,123 @@ const getHourlyForecast = async ({ name: city }) => {
 
 const formatTemprature = (temp) => `${temp?.toFixed(0)}°`;
 // const createIconUrl = (icon) => {return `https://openweathermap.org/img/wn/${icon}@2x.png`}; // its for openweather api's png
+
+const iconUrls = {
+    '01d': {
+        static: './icons/static/sun.png',
+        animated: './icons/animated/sun.gif'
+    },
+    '01n': {
+        static: './icons/static/night.png',
+        animated: './icons/animated/night.gif'
+    },
+    '02d': {
+        static: './icons/static/cloudy.png',
+        animated: './icons/animated/cloudy.gif'
+    },
+    '02n': {
+        static: './icons/static/cloudy-night.png',
+        animated: './icons/animated/cloudy-night.gif'
+    },
+    '03d': {
+        static: './icons/static/clouds.png',
+        animated: './icons/animated/clouds.gif'
+    },
+    '03n': {
+        static: './icons/static/clouds.png',
+        animated: './icons/animated/clouds.gif'
+    },
+    '04d': {
+        static: './icons/static/clouds.png',
+        animated: './icons/animated/clouds.gif'
+    },
+    '04n': {
+        static: './icons/static/clouds.png',
+        animated: './icons/animated/clouds.gif'
+    },
+    '09d': {
+        static: './icons/static/rain.png',
+        animated: './icons/animated/rain.gif'
+    },
+    '09n': {
+        static: './icons/static/rain.png',
+        animated: './icons/animated/rain.gif'
+    },
+    '10d': {
+        static: './icons/static/rain (2).png',
+        animated: './icons/animated/rain (2).gif'
+    },
+    '10n': {
+        static: './icons/static/rain.png',
+        animated: './icons/animated/rain.gif'
+    },
+    '11d': {
+        static: './icons/static/storm.png',
+        animated: './icons/animated/storm.gif'
+    },
+    '11n': {
+        static: './icons/static/storm.png',
+        animated: './icons/animated/storm.gif'
+    },
+    '13d': {
+        static: './icons/static/snow.png',
+        animated: './icons/animated/snow.gif'
+    },
+    '13n': {
+        static: './icons/static/snow.png',
+        animated: './icons/animated/snow.gif'
+    },
+    '50d': {
+        static: './icons/static/foggy.png',
+        animated: './icons/animated/foggy.gif'
+    },
+    '50n': {
+        static: './icons/static/foggy.png',
+        animated: './icons/animated/foggy.gif'
+    }
+};
+
 const createIconUrl = (icon) => {
-    switch (icon) {
-        case '01d':
-            return './icons/static/sun.png';
-        case '01n':
-            return './icons/static/night.png';
-        case '02d':
-            return './icons/static/cloudy.png';
-        case '02n':
-            return './icons/static/cloudy-night.png';
-        case '03d':
-            return './icons/static/clouds.png';
-        case '03n':
-            return './icons/static/clouds.png';
-        case '04d':
-            return './icons/static/clouds.png';
-        case '04n':
-            return './icons/static/clouds.png';
-        case '09d':
-            return './icons/static/rain.png';
-        case '09n':
-            return './icons/static/rain.png';
-        case '10d':
-            return './icons/static/rain (2).png';
-        case '10n':
-            return './icons/static/rain.png';
-        case '11d':
-            return './icons/static/storm.png';
-        case '11n':
-            return './icons/static/storm.png';
-        case '13d':
-            return './icons/static/snow.png';
-        case '13n':
-            return './icons/static/snow.png';
-        case '50d':
-            return './icons/static/foggy.png';
-        case '50n':
-            return './icons/static/foggy.png';
-    
-        default:
-            return './icons/static/clouds.png'
+    const iconUrl = iconUrls[icon];
+    if (iconUrl) {
+        return iconUrl.static;
+    } else {
+        return './icons/static/clouds.png'; // Default icon URL
     }
-}
-function pngtogif(test){
-    switch (test) {
-        case "./icons/static/sun.png":
-             return './icons/sun.gif';
-        case "./icons/static/sun.png":
-             return './icons/night.gif';
-        case './icons/static/cloudy.png':
-             return './icons/cloudy.gif';
-        case './icons/static/cloudy-night.png':
-             return './icons/cloudy-night.gif';
-        case './icons/static/clouds.png':
-             return './icons/clouds.gif';
-        case './icons/static/rain.png':
-             return './icons/rain.gif';
-        case './icons/static/rain (2).png':
-             return './icons/rain (2).gif';
-        case './icons/static/storm.png':
-             return './icons/storm.gif';
-        case './icons/static/snow.png':
-             return './icons/snow.gif';
-        case './icons/static/foggy.png':
-             return './icons/foggy.gif';
-        default:
-            return test;
-    }
-}
-function giftopng(test){
-    switch (test) {
-        case './icons/sun.gif':
-             return './icons/static/sun.png';
-        case './icons/night.gif':
-             return './icons/static/night.png';
-        case './icons/cloudy.gif':
-             return './icons/static/cloudy.png';
-        case './icons/cloudy-night.gif':
-             return './icons/static/cloudy-night.png';
-        case './icons/clouds.gif':
-             return './icons/static/clouds.png';
-        case './icons/rain.gif':
-             return './icons/static/rain.png';
-        case './icons/rain (2).gif':
-             return './icons/static/rain (2).png';
-        case './icons/storm.gif':
-             return './icons/static/storm.png';
-        case './icons/snow.gif':
-             return './icons/static/snow.png';
-        case './icons/foggy.gif':
-             return './icons/static/foggy.png';
-        default:
-            return test;
-    }
-}
+};
 
-// To Show Hover Effect On The Icons........
+const toggleIconAnimation = (iconElement) => {
+    const currentUrl = iconElement.getAttribute('src');
+    const staticIconPath = './icons/static/';
+    const animatedIconPath = './icons/animated/';
 
-document.body.addEventListener("mouseover", function(e) {
-    if (e.target.classList.contains("icon")) {
-        var t = e.target.getAttribute("src");
-        // console.log(t);
-        path = pngtogif(t);
-        e.target.src = path;
+    if (currentUrl.includes(staticIconPath)) {
+        const iconName = currentUrl.replace(staticIconPath, '');
+        const animatedUrl = animatedIconPath + iconName.replace('.png', '.gif');
+        iconElement.setAttribute('src', animatedUrl);
+    } else if (currentUrl.includes(animatedIconPath)) {
+        const iconName = currentUrl.replace(animatedIconPath, '');
+        const staticUrl = staticIconPath + iconName.replace('.gif', '.png');
+        iconElement.setAttribute('src', staticUrl);
     }
-  },false)
-document.body.addEventListener("mouseout", function(e) {
-    if (e.target.classList.contains("icon")) {
-        var t = e.target.getAttribute("src");
-        // console.log(t);
-        path = giftopng(t);
-        e.target.src = path;
+};
+
+document.body.addEventListener('mouseover', (e) => {
+    if (e.target.classList.contains('icon')) {
+        toggleIconAnimation(e.target);
     }
-  },false)
+}, false);
+
+document.body.addEventListener('mouseout', (e) => {
+    if (e.target.classList.contains('icon')) {
+        toggleIconAnimation(e.target);
+    }
+}, false);
+
 
 // To load the data
 
-const loadCurrentForecast = ({ name, main: { temp }, weather: [{ description, icon }]}) => {
+const loadCurrentForecast = ({ name, main: { temp }, weather: [{ description, icon }] }) => {
     const currentForecastElement = document.querySelector("#current-forecast");
     currentForecastElement.querySelector(".icon").src = `${createIconUrl(icon)}`;
     currentForecastElement.querySelector(".city").textContent = name;
@@ -182,20 +181,21 @@ const loadHourlyForecast = ({ main: { temp: tempNow }, weather: [{ icon: iconNow
         // to get data without formatted.... 
     }
     hourlyContainer.innerHTML = innerHTMLString;
-    
+
     let todayRain = hourlyForecast.slice(2, 3);
     var temp = todayRain[0].rain['3h'];
-    var rainPer = temp*100;
-    var rainRoundedPer = Math.round(rainPer*100)/100;
-
-    document.querySelector(".rainChanse").textContent = `Rain - ${rainRoundedPer}%`;
+    console.log("kill the bill: ",temp);
+    var rainPer = temp * 20;
+    var rainRoundedPer = Math.round(rainPer * 100) / 100;
+    var loadRainChanse = document.querySelector(".rainChanse") ;
+    rainRoundedPer < 100 ? loadRainChanse.textContent = `Rain - ${rainRoundedPer.toFixed(0)}%`: loadRainChanse.textContent = `Rain - 100%`;
 }
 
 // five day forecast
 
 const calculateDayWiseForecast = (hourlyForecast) => {
     let dayWiseForecast = new Map();
-    console.log("this is dayWiseForecast : ",hourlyForecast);
+    console.log("this is dayWiseForecast : ", hourlyForecast);
     for (let forecast of hourlyForecast) {
         const [date] = forecast.dt_txt.split(" ");
         const dayOfTheWeek = DAYS_OF_THE_WEEK[new Date(date).getDay()];
@@ -248,7 +248,8 @@ const loadHumidity = ({ main: { humidity } }) => {
 }
 const loadWind = ({ wind: { speed } }) => {
     let container = document.querySelector("#wind");
-    container.querySelector(".wind").textContent = `${speed.toFixed(1)}m/s`;
+    let kmPerHour = (speed * 60 * 60 / 1000).toFixed(0);
+    container.querySelector(".wind").textContent = `${kmPerHour}Km/h`;
 }
 
 const loadData = async () => {
@@ -264,9 +265,9 @@ const loadData = async () => {
 }
 
 loadForecastUsingGeoLocation = () => {
-    navigator.geolocation.getCurrentPosition(({coords}) =>{
-        const {latitude: lat, longitude: lon} = coords;
-        selectedCity = {lat,lon};
+    navigator.geolocation.getCurrentPosition(({ coords }) => {
+        const { latitude: lat, longitude: lon } = coords;
+        selectedCity = { lat, lon };
         loadData();
     }, error => console.log(error))
 }
@@ -289,7 +290,7 @@ const onSearchChange = async (event) => {
     let { value } = event.target;
     if (!value) {
         selectedCity = null;
-        selectedCityText = ""; 
+        selectedCityText = "";
     }
     if (value && (selectedCityText !== value)) {
         const listOfCities = await getCitiesGeoLocation(value);
@@ -301,7 +302,7 @@ const onSearchChange = async (event) => {
         document.querySelector("#cities").innerHTML = option;
         console.log(listOfCities);
     }
-    
+
 }
 
 //selection of the option
@@ -330,5 +331,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     searchInput.addEventListener("input", debounceSearch);
     searchInput.addEventListener("change", handleCitySelection);
 
-    
+
 })

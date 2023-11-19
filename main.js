@@ -20,7 +20,7 @@ const getCurrentWeatherData = async ({ lat, lon, name: city }) => {
 const getHourlyForecast = async ({ name: city }) => {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`);
     const data = await response.json();
-    console.log(data);
+    // console.log("hourly for",data);
     return data.list.map(forecast => {
         const { main: { temp, temp_max, temp_min }, dt, dt_txt, weather: [{ description, icon }], rain } = forecast;
         return { temp, temp_max, temp_min, dt, dt_txt, description, icon, rain }
@@ -183,12 +183,16 @@ const loadHourlyForecast = ({ main: { temp: tempNow }, weather: [{ icon: iconNow
     hourlyContainer.innerHTML = innerHTMLString;
 
     let todayRain = hourlyForecast.slice(2, 3);
-    var temp = todayRain[0].rain['3h'];
-    console.log("kill the bill: ",temp);
-    var rainPer = temp * 20;
-    var rainRoundedPer = Math.round(rainPer * 100) / 100;
-    var loadRainChanse = document.querySelector(".rainChanse") ;
-    rainRoundedPer < 100 ? loadRainChanse.textContent = `Rain - ${rainRoundedPer.toFixed(0)}%`: loadRainChanse.textContent = `Rain - 100%`;
+    var temp;
+    if (todayRain[0].rain) {
+        temp = todayRain[0].rain['3h'];
+    }
+    if (temp) {
+        var rainPer = temp * 20;
+        var rainRoundedPer = Math.round(rainPer * 100) / 100;
+        var loadRainChanse = document.querySelector(".rainChanse") ;
+        rainRoundedPer < 100 ? loadRainChanse.textContent = `Rain - ${rainRoundedPer.toFixed(0)}%`: loadRainChanse.textContent = `Rain - 100%`;
+    }
 }
 
 // five day forecast
@@ -219,7 +223,7 @@ const calculateDayWiseForecast = (hourlyForecast) => {
     return dayWiseForecast;
 }
 const loadFiveDayForecast = (hourlyForecast) => {
-    console.log(hourlyForecast);
+    console.log("for five days",hourlyForecast);
     const dayWiseForecast = calculateDayWiseForecast(hourlyForecast);
     const container = document.querySelector('.five-day-forecast-container');
     let dayWiseInfo = "";

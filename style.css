@@ -1,11 +1,10 @@
 *,
 *::after,
 *::before {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   box-sizing: border-box;
-  letter-spacing:3px;
+  letter-spacing: 3px;
 }
-
 
 :root {
   --spacing-medium: 8px;
@@ -33,12 +32,13 @@ body {
   width: 100%;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #dadada;
-  cursor: url(./icons/cursor.png) 15 15,auto;
+  cursor: url(./icons/cursor.png) 15 15, auto;
 }
-.contBody{
+.contBody {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -158,7 +158,7 @@ body {
 ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 10px;
   border-radius: 10px;
-  background: rgba(160, 160, 160, 0.5)
+  background: rgba(160, 160, 160, 0.5);
 }
 /* #hourly-forecast .hourly-container .time{
 
@@ -180,22 +180,22 @@ body {
   text-align: center;
   /* overflow: auto; */
 }
-#five-day-forecast h1{
+#five-day-forecast h1 {
   /* text-align: start; */
   font-size: 1rem;
   font-weight: bold;
   padding-bottom: 10px;
 }
-#five-day-forecast h3{
+#five-day-forecast h3 {
   font-size: 0.7rem;
 }
 #five-day-forecast .five-day-forecast-container {
   display: grid;
   grid-auto-flow: column;
+  overflow-x: auto;
 }
 .five-day-forecast-container .day-wise-forecast {
   display: inline-block;
-  overflow-x: auto;
 }
 .five-day-forecast-container .day-wise-forecast .min-temp,
 .five-day-forecast-container .day-wise-forecast .max-temp {
@@ -232,7 +232,9 @@ body {
   grid-area: wind;
   text-align: center;
 }
-#feels-like > h1,#humidity > h1,#wind > h1 {
+#feels-like > h1,
+#humidity > h1,
+#wind > h1 {
   font-size: 1rem;
 }
 
@@ -247,7 +249,7 @@ body {
     gap: var(--spacing-regular);
     justify-content: space-evenly;
     width: 100%;
-    height:100%;
+    height: 100%;
   }
   #humidity > p {
     font-size: 1rem;
@@ -256,17 +258,10 @@ body {
     font-size: 1rem;
   }
 }
-@media (width<=650px) {
-  .container {
-    top: 50px;
-    position: absolute;
-  }
-}
-
 
 /* Sider left part */
 
-.sider{
+.sider {
   background: white;
   height: 100%;
   width: 30%;
@@ -274,7 +269,7 @@ body {
   border-bottom-left-radius: 30px;
 }
 
-.searchCont{
+.searchCont {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -283,17 +278,17 @@ body {
   /* border:2px solid red; */
   margin: 20px;
 }
-.searchIcon{
+.searchIcon {
   display: inline-block;
   width: 20px;
   height: 20px;
 }
-#current-forecast .sicon{
+#current-forecast .sicon {
   width: 20px;
   height: 20px;
   display: inline-block;
 }
-#current-forecast > .disc{
+#current-forecast > .disc {
   width: 100%;
   text-align: left;
   padding-top: 2rem;
@@ -301,6 +296,88 @@ body {
   height: auto;
   display: inline-block;
 }
-.icon{
+.icon {
   transform: scale(0.6);
+}
+
+@media only screen and (max-width: 650px) {
+  /* .container {
+    top: 50px;
+    position: absolute;
+  } */
+  body {
+    height: auto;
+  }
+  .contBody {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    overflow: hidden;
+  }
+  .contBody .sider {
+    width: 100%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #current-forecast h1 {
+    padding-left: 0;
+  }
+  #current-forecast > .disc {
+    padding-top: 0;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #current-forecast .icon {
+    width: 40%;
+  }
+  #current-forecast .temp {
+    padding-left: 0;
+  }
+  #current-forecast span {
+    font-size: 1.5rem;
+    margin-top: 0;
+    position: relative;
+    transform: translate(40px, -40px);
+  }
+  #current-forecast {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .container {
+    max-width: none;
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+      "search search search"
+      "current current corrent"
+      "hourly hourly hourly"
+      "fiveday fiveday fiveday"
+      "feelslike humidity wind";
+  }
+  .container,
+  .container > article {
+    border-radius: 0 0px 30px 30px;
+  }
+  #feels-like > h1,
+  #humidity > h1,
+  #wind > h1 {
+    font-size: .8rem;
+  }
+  #feels-like > p,
+  #humidity > p,
+  #wind > p {
+    font-size: .8rem;
+  }
+  .searchCont {
+    justify-content: space-evenly;
+  }
 }

@@ -315,6 +315,7 @@ body {
     margin-top: 50px;
     margin-bottom: 50px;
     overflow: hidden;
+    width: 95%;
   }
   .contBody .sider {
     width: 100%;

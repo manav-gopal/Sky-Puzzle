@@ -119,7 +119,7 @@ const createIconUrl = (icon) => {
 const toggleIconAnimation = (iconElement) => {
     const currentUrl = iconElement.getAttribute('src');
     const staticIconPath = './icons/static/';
-    const animatedIconPath = './icons/animated/';
+    const animatedIconPath = './icons/Animated/';
 
     if (currentUrl.includes(staticIconPath)) {
         const iconName = currentUrl.replace(staticIconPath, '');
